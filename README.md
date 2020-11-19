@@ -1,2 +1,2 @@
 # LabBD
-"Database Laboratory" Class Project - University of Pisa
+"Database Laboratory" Class Team Project - University of Pisa
