@@ -13,8 +13,8 @@ Ai  birrai  piace  registrare  le  proprie  ricette  per  riferimento  futuro  e
 
 L'obiettivo di questo progetto è quello di sviluppare un'applicazione per i birrai domestici che consenta loro di mantenere un elenco di ricette e adattare quelle esistenti. L'applicazione deve anche: 
 * mantenere un elenco di ingredienti disponibili;
-* aggiornare questo elenco dopo un ciclo di produzione e quando vengono acquistati nuovi ingredienti; * produrre liste della spesa per il lotto successivo;
-* guidare il birraio nel processo di produzione
+* aggiornare questo elenco dopo un ciclo di produzione e quando vengono acquistati nuovi ingredienti; 
+* produrre liste della spesa per il lotto successivo;
 <br>
 
 **Scopo del progetto**
