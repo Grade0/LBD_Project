@@ -1,6 +1,10 @@
 # LabBD
 "Database Laboratory" Class Team Project - University of Pisa
 
+**PROGETTO IN CORSO D'OPERA ...**
+
+**Team:** Betola Gianmarco, Catania Saverio, Chen Davide, Li Malio, Pardini Luca, Stasula Ruslan
+
 ## Una Cervecita Fresca  
 
 La birra fatta in casa è un'attività che riceve crescente attenzione da parte degli appassionati. Ogni birraio amatoriale possiede un'attrezzatura per il processo di produzione della birra su piccola  scala  (bollitori,  fermentatori,  tubi,  ecc.)  con  una  certa  capacità  massima  di fermentazione: il numero di litri che l'attrezzatura è in grado di gestire in un unico "lotto". La preparazione della birra richiede anche ingredienti, le cui quantità effettive variano da una ricetta all'altra, questi sono vari tipi di malto, luppolo, lieviti e zuccheri (e, naturalmente, acqua). 
