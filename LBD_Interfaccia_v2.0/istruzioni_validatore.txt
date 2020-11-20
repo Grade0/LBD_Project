@@ -1,0 +1,19 @@
+ISTRUZIONI PER USARE IL VALIDATORE SINTATTICO
+
+1 Il validatore agisce esclusivamente sui campi di tipo TEXTBOX al momento della sottomissione.
+
+2 La procedura CASELLADITESTO prende in input come parametri, oltre a quelli già presenti nel vecchio pacchetto,
+
+	 a.  TIPO: Indica il "tipo" di stringa che deve contenere la textbox per poter considerata valida. Deve essere una stringa (SENZA SPAZI AI LATI!!) scelta tra:
+
+		1. text: La casella deve contenere SOLO lettere(non sono ammessi i caratteri speciali)
+
+		2. number: La casella deve contenere solo caratteri numerici
+
+		3. mail: La casella deve contenere un indirizzo mail
+
+		4. alfa: La casella contiene una stringa alfanumerica (senza caratteri speciali). Da usare per verificare il Codice fiscale, ad esempio.
+
+	b.  LunghezzaMax: Indica la lunghezza massima della stringa che l'utente può inserire.
+
+	c. Require: Se settato a true indica che il campo è obbligatorio. Di default vale false.
