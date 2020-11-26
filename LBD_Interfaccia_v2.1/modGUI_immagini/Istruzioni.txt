@@ -1,0 +1,67 @@
+***** Istruzioni per caricare le immagini al fine di visualizzarlo sulla pagina web *****
+
+--- STEP 1
+--- PROCEDURA PER CREARE LA TABELLA
+
+CREATE TABLE files_orcl2021 (
+  id     NUMBER(10)    NOT NULL,
+  name   VARCHAR2(50)  NOT NULL,
+  datafile  BLOB          NOT NULL
+);
+
+ALTER TABLE files_orcl2021 ADD (
+  CONSTRAINT files_orcl2021_pk PRIMARY KEY (id)
+);
+
+ALTER TABLE files_orcl2021 ADD (
+  CONSTRAINT files_orcl2021_uk UNIQUE (name)
+);
+
+
+
+--- STEP 2
+-- PROCEDURA PER CARICARE I FILES 
+
+CREATE SEQUENCE files_orcl2021_seq
+MINVALUE 1 MAXVALUE 9999999 
+INCREMENT BY 1 START WITH 241 CACHE 20 NOORDER  CYCLE ;
+
+declare
+  type table_varchar  is table of varchar(100);
+  var_table_varchar  table_varchar;
+  l_dir VARCHAR2(100) := 'FILES_ORCL2021_DIR';
+  l_bfile  BFILE;
+  l_blob   BLOB;
+begin
+  var_table_varchar  := table_varchar('beerlogo.png', 'bgbeer2.jpg');
+  for l_file in 1 .. var_table_varchar.count loop
+  
+      INSERT INTO files_orcl2021 (id, name, datafile)
+      VALUES (files_orcl2021_seq.nextVal,var_table_varchar(l_file), empty_blob())
+      RETURN datafile INTO l_blob;
+    
+      l_bfile := BFILENAME(l_dir, var_table_varchar(l_file));
+      DBMS_LOB.fileopen(l_bfile, DBMS_LOB.file_readonly);
+      DBMS_LOB.loadfromfile(l_blob, l_bfile, DBMS_LOB.getlength(l_bfile));
+      DBMS_LOB.fileclose(l_bfile);
+    
+      COMMIT;
+    end loop;
+end;
+
+
+--- STEP 3 
+
+Compilare il FILES_ORCL2021_API.pks 
+
+
+--- STEP 4
+
+
+Compilare il FILES_ORCL2021_API.pkb
+
+--- STEP 5
+
+Ricordarsi di fare i grant
+
+

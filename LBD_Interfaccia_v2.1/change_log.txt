@@ -1,0 +1,55 @@
+****************************************************************************
+***************** STORICO MODIFICHE PACCHETTO INTERFACCIA ******************
+****************************************************************************
+
+-----------------------------------
+-------------- v2.1 ---------------
+-----------------------------------
+- Aggiunto le procedure BottoneInfo, BottoneEdit, BottoneConfirm, BottoneDelete, BottoneCart, ApriInlineSelect e ChiudiInlineSelectConBottone
+- Eliminato la procedura ChiudiRigaTabellaConBottone
+- Aggiornato il documento Guida_modGUI
+- Aggionato la procedura testModGUI_2 con esempi di utilizzo delle nuove procedure introdotte
+
+-----------------------------------
+-------------- v2.0 ---------------
+-----------------------------------
+- Aggiunto le procedure ApriMenuNav, chiudiMenuNav, ApriMenuLat, ChiudiMenuLat, CollegamentoNav, ChiudiCollegamentoSubNav per rendere customizzabile il menu di navigazione
+- Modificato la procedura Collegamento
+- Modificato la directory modGUI_test con l'aggiunta dell'esempio d'uso nel testModGUI_0
+- Aggiornato la documentazione Guida_modGUI
+
+-----------------------------------
+-------------- v1.1 ---------------
+-----------------------------------
+- Corretto il bug della procedura CasellaDiTesto in cui i tipi 'alfa' e 'text' non accettavano lo 'spazio bianco'
+- Sostituito in alcuni punti del modGUI.pkb i link espliciti con le costanti
+- Aggiunto nel pacchetto le istruzioni per caricare le immagini al fine di visualizzarlo sulla pagina web
+
+-----------------------------------
+-------------- v1.0 ---------------
+-----------------------------------
+- Primo rilascio
+
+
+****************************************************************************
+******************************** PER TUTTI *********************************
+****************************************************************************
+Ad ogni nuovo rilascio ricordarsi sempre di modificare l'utente con il proprio nome utente assegnato nelle costanti presente all'inizio e alla fine del file COSTANTI.pks
+
+
+****************************************************************************
+***************************** PER I SISTEMISTI *****************************
+****************************************************************************
+
+1. In molte procedure del pacchetto Interfaccia noterete un parametro 'idSessione' di tipo int. Dovrete creare una tabella che contenga almeno gli attributi 'idSessione', 'tipoUtente', 'nome', 'cognome'. Questo perché si dovrà avere modo di risalire a nome, cognome e tipo di utente a partire dall'ID sessione (che è l'unico parametro che ci portiamo dietro in molte procedure).
+
+2. Il pacchetto che creerete dovrà chiamarsi 'pksys'
+
+3. 'pksys' dovrà contenere, tra le altre cose, le seguenti procedure (rispettare maiuscole/minuscole):
+	- procedure login;
+	- procedure registrati;
+	- procedure logout(idSessione int);
+
+4. Al termine delle procedure 'pksys.login' e 'pksys.registrazione' dovrete invocare la procedura 'modGUI.PaginaPrincipale(idSessione)', dove 'idSessione' è l'ID che avrete generato per quella sessione.
+
+5. Al termine della procedura 'pksys.logout' dovrete invocare la procedura 'modGUI.PaginaOspiti'
