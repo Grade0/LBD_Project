@@ -3,6 +3,12 @@
 ****************************************************************************
 
 -----------------------------------
+-------------- v2.2 ---------------
+-----------------------------------
+- Modificato ApriFormHidden con possibilità di assegnare id e classe
+- Sistemato l'interfaccia di Login (modGUI.ApriPagina(idSessione => 0))
+
+-----------------------------------
 -------------- v2.1 ---------------
 -----------------------------------
 - Aggiunto le procedure BottoneInfo, BottoneEdit, BottoneConfirm, BottoneDelete, BottoneCart, ApriInlineSelect e ChiudiInlineSelectConBottone
