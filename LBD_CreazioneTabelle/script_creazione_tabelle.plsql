@@ -62,8 +62,8 @@ CREATE TABLE   Birrai  (
 
 CREATE TABLE   Tipi  (
    idtipo   NUMBER(2) PRIMARY KEY,
-   nome  VARCHAR2(10) CHECK(nome IN('malto', 'luppolo', 'varie')) UNIQUE,
-   unita_di_misura  VARCHAR2(3) CHECK(unita_di_misura IN ('g', 'mg', 'kg')) NOT NULL
+   nome  VARCHAR2(10) CHECK(nome IN('malto', 'luppolo', 'varie')),
+   unita_di_misura  VARCHAR2(3) CHECK(unita_di_misura IN ('g', 'mg', 'kg', 'l')) NOT NULL
 );
 
 
@@ -75,8 +75,9 @@ CREATE TABLE   Ingredienti  (
    utilizzabile NUMBER(1) CHECK(utilizzabile IN (0,1)) NOT NULL,
    idtipo   NUMBER(2) NOT NULL
 	REFERENCES Tipi(idtipo),
-   idfornitore    NUMBER(5) NOT NULL
+   idfornitore    NUMBER(5)
 	REFERENCES Fornitori(idfornitore)
+    ON DELETE SET NULL
 );
 
 CREATE TABLE   OrdiniBirrai  (
@@ -84,8 +85,9 @@ CREATE TABLE   OrdiniBirrai  (
    numero_fattura  VARCHAR2(9) UNIQUE,
    data_ordine  DATE NOT NULL,
    prezzo_totale  FLOAT CHECK(prezzo_totale>0),
-   id_birraio    NUMBER(5) NOT NULL
-	REFERENCES Birrai(idbirraio)
+   id_birraio    NUMBER(5)
+    REFERENCES Birrai(idbirraio)
+   ON DELETE SET NULL
 );
 
 CREATE TABLE   IngredientiBirrai  (
@@ -112,7 +114,7 @@ CREATE TABLE   OrdiniClienti  (
    idordine NUMBER(5) PRIMARY KEY,
    data_ordine DATE NOT NULL,
    prezzo_totale NUMBER(5) CHECK(prezzo_totale>0),
-   stato VARCHAR2(10) CHECK(stato IN ('prenotato', 'in preparazione', 'spedito', 'annullato')) NOT NULL,
+   stato VARCHAR2(20) CHECK(stato IN ('prenotato', 'in preparazione', 'spedito', 'annullato')) NOT NULL,
    idcliente NUMBER(5) NOT NULL
 	REFERENCES Clienti(idcliente)
 );
@@ -141,8 +143,9 @@ CREATE TABLE   Lotti  (
    prezzo_al_litro    NUMBER(5) CHECK(prezzo_al_litro>0),
    idricetta    NUMBER(5) NOT NULL
 	REFERENCES Ricette(idricetta),
-   idbirraio    NUMBER(5) NOT NULL
+   idbirraio    NUMBER(5)
 	REFERENCES Birrai(idbirraio)
+    ON DELETE SET NULL 
 );
 
 CREATE TABLE   Recensioni  (
@@ -158,8 +161,9 @@ CREATE TABLE   Annotazioni  (
    idannotazione    NUMBER(5) PRIMARY KEY,
    annotazione  VARCHAR2(500) NOT NULL,
    rilascio  DATE NOT NULL,
-   idbirraio    NUMBER(5) NOT NULL
-	REFERENCES Birrai(idbirraio),
+   idbirraio    NUMBER(5)
+	REFERENCES Birrai(idbirraio)
+    ON DELETE SET NULL,
    idlotto    NUMBER(5) NOT NULL
 	REFERENCES Lotti(idlotto)
 );
@@ -189,12 +193,12 @@ CREATE TABLE   OrdiniClientiLotti  (
    numero_litri   NUMBER(10) CHECK(numero_litri>0),
    prezzo_litro    NUMBER(5) NOT NULL CHECK(prezzo_litro>0),
    pronto  NUMBER(1) CHECK(pronto IN (0,1)) NOT NULL,
-  PRIMARY KEY ( idordine ,  idlotto )
+  PRIMARY KEY ( idordine ,  idlotto )	
 );
 /
 
 
-CREATE SEQUENCE idSessioni_seq START WITH 1 MINVALUE 0 INCREMENT BY 1 MAXVALUE 4294967295 CYCLE NOCACHE;
+CREATE SEQUENCE idSessioni_seq START WITH 1 MINVALUE 0 INCREMENT BY 1 MAXVALUE 4294967295 CYCLE N	OCACHE;
 CREATE SEQUENCE idFornitori_seq START WITH 0 MINVALUE 0 INCREMENT BY 1 MAXVALUE 4294967295 CYCLE NOCACHE;
 CREATE SEQUENCE idClienti_seq START WITH 0 MINVALUE 0 INCREMENT BY 1 MAXVALUE 4294967295 CYCLE NOCACHE;
 CREATE SEQUENCE idBirrai_seq START WITH 0 MINVALUE 0 INCREMENT BY 1 MAXVALUE 4294967295 CYCLE NOCACHE;
@@ -205,3 +209,4 @@ CREATE SEQUENCE idRicette_seq START WITH 0 MINVALUE 0 INCREMENT BY 1 MAXVALUE 42
 CREATE SEQUENCE idLotti_seq START WITH 0 MINVALUE 0 INCREMENT BY 1 MAXVALUE 4294967295 CYCLE NOCACHE;
 CREATE SEQUENCE idRecensioni_seq START WITH 0 MINVALUE 0 INCREMENT BY 1 MAXVALUE 4294967295 CYCLE NOCACHE;
 CREATE SEQUENCE idAnnotazioni_seq START WITH 0 MINVALUE 0 INCREMENT BY 1 MAXVALUE 4294967295 CYCLE NOCACHE;
+CREATE SEQUENCE idOrdini_seq START WITH 0 MINVALUE 0 INCREMENT BY 1 MAXVALUE 4294967295 CYCLE NOCACHE;
