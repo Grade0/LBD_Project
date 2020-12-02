@@ -3,6 +3,18 @@
 ****************************************************************************
 
 -----------------------------------
+-------------- v2.4 ---------------
+-----------------------------------
+- Miglioramenti vari
+
+-----------------------------------
+-------------- v2.3 ---------------
+-----------------------------------
+- Aggiunto le procedure ApriMenuGruppo1, ApriMenuGruppo2, ApriMenuGruppo3, ChiudiMenuGruppo1, ChiudiMenuGruppo2, ChiudiMenuGruppo3, MenuLatGruppo1, MenuLatGruppo2, MenuLatGruppo3
+- Aggiornato il documento Guida_modGUI
+- Aggiunto la procedura testModGUI_7 con esempi di utilizzo delle nuove procedure introdotte
+
+-----------------------------------
 -------------- v2.2 ---------------
 -----------------------------------
 - Modificato ApriFormHidden con possibilità di assegnare id e classe
@@ -21,7 +33,7 @@
 -----------------------------------
 - Aggiunto le procedure ApriMenuNav, chiudiMenuNav, ApriMenuLat, ChiudiMenuLat, CollegamentoNav, ChiudiCollegamentoSubNav per rendere customizzabile il menu di navigazione
 - Modificato la procedura Collegamento
-- Modificato la directory modGUI_test con l'aggiunta dell'esempio d'uso nel testModGUI_0
+- Modificato la directory modGUI_test con l'aggiunta dell'esempio d'uso nel testModGUI_6
 - Aggiornato la documentazione Guida_modGUI
 
 -----------------------------------

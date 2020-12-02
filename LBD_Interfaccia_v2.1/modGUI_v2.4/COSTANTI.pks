@@ -95,7 +95,7 @@ if its not present, dont show loader */
   margin-top: 10%;
   margin-right: 15%;
   padding: 10px 0;
-  color: #fff;
+  color: #232a30;
   box-shadow: 0 0 20px 2px linea(250,250,250,0.5);
   border-radius: 15px;
   position: absolute;
@@ -120,14 +120,11 @@ if its not present, dont show loader */
 }
 
 #indicator {
-  width: 80%;
+  width: 100%;
   border: none;
   background: #232a30;
-  height: 2px;
+  height: 1px;
   margin-top: 0;
-  left: 32px;
-  position: absolute;
-  font-size: 30px;
 }
 
 
@@ -195,7 +192,7 @@ nav ul li a:hover {
   display: block;
   margin: 0;
   padding:  10px 0px 10px 20px; /* padding around links*/
-  min-width:  135px;
+  width:  135px;
   text-align: left;
   /*for debuging purpose*/
   /*outline: 1px solid #000;*/
@@ -551,13 +548,8 @@ span.textlabel {
 
 
 label{
-  text-align:center;
+  display: inline-block;
   word-wrap:break-word
-}
-
-.label-login {
-  position: relative;
-  left: 0;
 }
 
 .container{
@@ -601,7 +593,12 @@ width:150px;
 boot constant varchar2(32767) :=
 '
 .form-group{
-  margin-bottom:15px
+  margin-bottom: 15px
+  
+}
+
+.form-g{
+  margin-bottom: 20px
   
 }
   
@@ -612,24 +609,24 @@ boot constant varchar2(32767) :=
 }
 
 .form-group-login {
-  margin-bottom: 15px;
+  margin: auto;
+  padding-top: 20px;
   position: relative;
   display: inline-block;
-  right: 50px;
-  width: 280px;
+  width: 300px;
   text-align: center;
-  outline: 1px solid #fff;
-  height: 150px;
-  vertical-align:middle
+  height: 250px;
+  vertical-align: middle;
 }
 
  .row:after,.row:before{
-    display:table;content:" "
+    display:table;
+    content:" "
 }
 
 .control-label{
   margin-bottom:0;
-  vertical-align:middle
+  /*vertical-align:middle*/
 }
 
 
@@ -685,8 +682,6 @@ boot constant varchar2(32767) :=
   border-radius:25px;
 }
 
-
-
 .form-login {
   height: 50px;
   padding:20px;
@@ -701,7 +696,6 @@ boot constant varchar2(32767) :=
   outline: none;
   left: 50px;
 }
-
 
 .form-control:focus{
     border-color:#FFBF00;
@@ -741,6 +735,11 @@ input[type="checkbox"], input[type="radio"]{
 
 script constant varchar2(32767) :=
 '
+        function sbmt() {
+          document.getElementById("esci").submit();
+        }
+        
+        
         /* Set the width of the side navigation to 300px */
         function openNav(id_var) {
             document.getElementById(id_var).style.width = "300px";
@@ -892,20 +891,34 @@ root constant VARCHAR2(20) := '/apex/davide.'; -- DA SOSTITUIRE (N.B. INCLUDERE 
 server constant VARCHAR2(50) := 'http://131.114.73.203:8080';
 interfaccia constant VARCHAR2(50) := '/apex/davide.'; -- DA SOSTITUIRE (N.B. INCLUDERE IL PUNTO FINALE!!!)
 
---SOSTITUIRE la costante nel seguente modo q'['CostanteDaSostituire']'
+-- Non modificare
 -- IMPORTANTE NON INSERIRE SPAZI E LASCIARE INALTERATO IL PATTERN q'['']'
-mySidenav constant VARCHAR(20) := q'['dav-mySidenav']'; 
+mySidenav constant VARCHAR(20) := q'['mySidenav']'; 
 
 /* Operazioni menù principale */
 /* NOTA: si tratta delle operazioni da invocare a seguito del click sulle voci del menù principale */
 home constant VARCHAR2(500) := 'nomeOperazione';
-pacchetti constant VARCHAR2(500) := 'nomeOperazione';
-servGenerali constant VARCHAR2(500) := 'nomeOperazione';
-prenotazioni constant VARCHAR2(500) := 'nomeOperazione';
-carrello constant VARCHAR2(500) := 'nomeOperazione';
+subMenuGruppo1 constant VARCHAR2(500) := 'nomeOperazione';
+subMenuGruppo2 constant VARCHAR2(500) := 'nomeOperazione';
+subMenuGruppo3 constant VARCHAR2(500) := 'nomeOperazione';
+carrello constant VARCHAR2(500) := 'Gruppo3.visualizzaCarrello';
 
-/* Operazioni menù backoffice */
-/* NOTA: si tratta delle pagine principali di ciascun gruppo del 3° raggruppamento */
+/* Operazioni menù utente */
+/*gruppo1*/
+profilo1 constant VARCHAR2(500) := 'nomeOperazione';
+inventario constant VARCHAR2(500) := 'nomeOperazione';
+ricette constant VARCHAR2(500) := 'nomeOperazione';
+
+/*gruppo2*/
+profilo2 constant VARCHAR2(500) := 'nomeOperazione';
+vendite constant VARCHAR2(500) := 'nomeOperazione';
+prodotti constant VARCHAR2(500) := 'nomeOperazione';
+
+/*gruppo3*/
+profilo3 constant VARCHAR2(500) := 'nomeOperazione';
+ordini constant VARCHAR2(500) := 'nomeOperazione';
+recensioni constant VARCHAR2(500) := 'nomeOperazione';
+
 gruppo1 constant VARCHAR2(500) := 'nomeOperazione';
 gruppo2 constant VARCHAR2(500) := 'nomeOperazione';
 gruppo3 constant VARCHAR2(500) := 'nomeOperazione';

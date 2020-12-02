@@ -14,9 +14,18 @@ procedure ApriBody(idSessione int default 0);
 
 ------------- AGGIUNTO -------------------
 procedure ApriMenuNav(idSessione int, indirizzo varchar2);
+procedure ApriMenuGruppo1(idSessione int, indirizzo varchar2);
+procedure ApriMenuGruppo2(idSessione int, indirizzo varchar2);
+procedure ApriMenuGruppo3(idSessione int, indirizzo varchar2);
+procedure ChiudiMenuGruppo1(idSessione int);
+procedure ChiudiMenuGruppo2(idSessione int);
+procedure ChiudiMenuGruppo3(idSessione int);
 procedure ChiudiMenuNav(idSessione int);
 procedure ApriMenuLat(idSessione int, ident varchar2 default '', subMenu boolean default false, parentName varchar2 default '');
 procedure ChiudiMenuLat;
+procedure MenuLatGruppo1(idSessione int, indirizzo varchar2);
+procedure MenuLatGruppo2(idSessione int, indirizzo varchar2);
+procedure MenuLatGruppo3(idSessione int, indirizzo varchar2);
 ------------------------------------------
 
 procedure CreaMenuPrincipale(idSessione int);
@@ -37,7 +46,7 @@ procedure ApriForm(azione varchar2, nome varchar2, idSessione int default -1);
 
 procedure ChiudiForm;
 
-procedure ApriFormHidden(azione varchar2, idSessione int default -1);
+procedure ApriFormHidden(azione varchar2, idSessione int default -1, ident varchar2 default '', classe varchar2 default '');
 
 procedure ChiudiFormHidden;
 

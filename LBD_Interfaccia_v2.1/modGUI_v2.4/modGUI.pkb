@@ -45,7 +45,7 @@ begin
 
   modGUI.ApriDiv(classe => '');
   if (idSessione = 0) then /* Sessione di tipo 'Ospite' */
-    modGUI.ApriDiv(ident => 'bgimg');
+  modGUI.ApriDiv(ident => 'bgimg');
 	modGUI.ApriDiv(classe => 'navbar');
         htp.img(Costanti.server || Costanti.interfaccia || 'files_orcl2021_api.GetImage?p_name=beerlogo.png', cattributes => 'class="imglogo0"');
         htp.print('<h1 class="logo0">Una Cervecita Fresca</h1>');
@@ -56,12 +56,18 @@ begin
                        <hr id="indicator">');
         modGUI.ChiudiDiv;
 
-        modGUI.ApriForm(Costanti.server || Costanti.root || 'pksys.login', 'loginform', idSessione);
-        htp.print('<div class="form-group-login">
-                   <span>Usernam</span>
-                   <input class="text required form-login" name="Username" placeholder="Inserisci lo username...">
-                   </div>');
-        modGUI.ChiudiForm;
+        modGUI.ApriFormHidden(Costanti.server || Costanti.root || 'login.checkLogin');
+        modGUI.ApriDiv(classe => 'form-group-login');
+        --modGUI.CasellaDiTesto('Username', 'Username', suggerimento => 'Inserisci Username...', lunghezzaMax => '45', tipo => 'alfa', require => true);
+        htp.prn(' <div class="form-g">
+                  <input type="text" required class="form-control" name="Usr" placeholder="Inserire username..." maxlength="45">
+                  </div>');
+        htp.prn(' <div class="form-g">
+                  <input type="password" class="password form-control" required name="Pwd" placeholder="Inserire password...">
+                  </div>');
+        modGUI.BOTTONEFORM(testo => 'Accedi');
+        modGUI.ChiudiDiv;
+        modGUI.chiudiFormHidden;
     modGUI.chiudiDiv;
     modGUI.chiudiDiv;    
 
@@ -75,7 +81,7 @@ begin
 
 end ApriBody;
 
-procedure ApriMenuNav(idSessione int, indirizzo varchar2) is
+procedure ApriMenuNav(idSessione int) is
 begin
     modGUI.ApriDiv(classe => 'menuDiv');
     htp.img(Costanti.server || Costanti.interfaccia || 'files_orcl2021_api.GetImage?p_name=beerlogo.png', cattributes => 'class="imglogo"');
@@ -83,6 +89,112 @@ begin
 
     htp.print('<nav><ul>');
 end ApriMenuNav;
+
+procedure ApriMenuGruppo1(idSessione int, indirizzo varchar2) is
+begin
+    modGUI.ApriDiv(classe => 'menuDiv');
+    htp.img(Costanti.server || Costanti.interfaccia || 'files_orcl2021_api.GetImage?p_name=beerlogo.png', cattributes => 'class="imglogo"');
+    htp.print('<h1 class="hide3">Una Cervecita Fresca</h1>');
+
+    htp.print('<nav><ul>');
+    modGUI.CollegamentoNav('Home',  indirizzo || '?idSessione=' || idSessione);
+    modGUI.CollegamentoNav('Gruppo 1', 'javascript:void(0)', true, 'primo');
+end ApriMenuGruppo1;
+
+procedure ChiudiMenuGruppo1(idSessione int) IS
+BEGIN
+    modGUI.ChiudiCollegamentoSubNav;
+        
+    modGUI.CollegamentoNav('Gruppo 2',  'javascript:void(0)');
+    modGUI.CollegamentoNav('Gruppo 3',  'javascript:void(0)');
+    
+    htp.print('<li class="dropdown">
+        <button class="dropbtn"><i class="fa fa-user"></i>&nbsp; '|| login.getUnameFromSession(idSessione) ||' |&nbsp;'|| login.getRoleFromSession(idSessione) ||' </a></button>');
+        modGUI.ApriDiv(classe => 'dropdown-content');
+            modGUI.Collegamento('<i class="fas fa-user-circle"></i>&nbsp; Profilo',  Costanti.server || Costanti.root || Costanti.profilo1 || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fas fa-box"></i>&nbsp; Magazzino',  Costanti.server || Costanti.root || Costanti.inventario || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fas fa-clipboard-list"></i>&nbsp; Ricette',  Costanti.server || Costanti.root || Costanti.ricette || '?idSessione=' || idSessione);
+            modGUI.ApriFormHidden(Costanti.server || Costanti.root || 'login.logout', IDSESSIONE, ident => 'esci');
+            htp.prn('<a href="javascript:void(0)" onclick="sbmt()"><i class="fa fa-sign-out"></i>&nbsp; Logout</i></a>');
+            modGUI.ChiudiFormHidden;
+        modGUI.ChiudiDiv;
+    htp.print('</li><li class="hide2">');
+        htp.print('<i id="hamb-icon" class="fas fa-bars" onclick="openNav('|| Costanti.mySidenav ||')"></i>');
+
+    htp.print('</li></ul></nav>');
+
+	  modGUI.ChiudiDiv;
+END ChiudiMenuGruppo1;
+
+procedure ApriMenuGruppo2(idSessione int, indirizzo varchar2) is
+begin
+    modGUI.ApriDiv(classe => 'menuDiv');
+    htp.img(Costanti.server || Costanti.interfaccia || 'files_orcl2021_api.GetImage?p_name=beerlogo.png', cattributes => 'class="imglogo"');
+    htp.print('<h1 class="hide3">Una Cervecita Fresca</h1>');
+
+    htp.print('<nav><ul>');
+    modGUI.CollegamentoNav('Home',  indirizzo || '?idSessione=' || idSessione);
+    modGUI.CollegamentoNav('Gruppo 1',  'javascript:void(0)');
+    modGUI.CollegamentoNav('Gruppo 2',  'javascript:void(0)', true, 'primo');
+end ApriMenuGruppo2;
+
+procedure ChiudiMenuGruppo2(idSessione int) IS
+BEGIN
+    modGUI.ChiudiCollegamentoSubNav;
+        
+    modGUI.CollegamentoNav('Gruppo 3',  'javascript:void(0)');
+    htp.print('<li class="dropdown">
+        <button class="dropbtn"><i class="fa fa-user"></i>&nbsp; '|| login.getUnameFromSession(idSessione) ||' |&nbsp;'|| login.getRoleFromSession(idSessione) ||' </a></button>');
+        modGUI.ApriDiv(classe => 'dropdown-content');
+            modGUI.Collegamento('<i class="fas fa-user-circle"></i>&nbsp; Profilo',  Costanti.server || Costanti.root || Costanti.profilo2 || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fas fa-coins"></i>&nbsp; Vendite',  Costanti.server || Costanti.root || Costanti.vendite || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fas fa-tractor"></i>&nbsp; Prodotti',  Costanti.server || Costanti.root || Costanti.prodotti || '?idSessione=' || idSessione);
+            modGUI.ApriFormHidden(Costanti.server || Costanti.root || 'login.logout', IDSESSIONE, ident => 'esci');
+            htp.prn('<a href="javascript:void(0)" onclick="sbmt()"><i class="fa fa-sign-out"></i>&nbsp; Logout</i></a>');
+            modGUI.ChiudiFormHidden;
+        modGUI.ChiudiDiv;
+    htp.print('</li><li class="hide2">');
+        htp.print('<i id="hamb-icon" class="fas fa-bars" onclick="openNav('|| Costanti.mySidenav ||')"></i>');
+
+    htp.print('</li></ul></nav>');
+
+	modGUI.ChiudiDiv;
+END ChiudiMenuGruppo2;
+
+procedure ApriMenuGruppo3(idSessione int, indirizzo varchar2) is
+begin
+    modGUI.ApriDiv(classe => 'menuDiv');
+    htp.img(Costanti.server || Costanti.interfaccia || 'files_orcl2021_api.GetImage?p_name=beerlogo.png', cattributes => 'class="imglogo"');
+    htp.print('<h1 class="hide3">Una Cervecita Fresca</h1>');
+
+    htp.print('<nav><ul>');
+    modGUI.CollegamentoNav('Home',  indirizzo || '?idSessione=' || idSessione);
+    modGUI.CollegamentoNav('Gruppo 1',  'javascript:void(0)');
+    modGUI.CollegamentoNav('Gruppo 2',  'javascript:void(0)');
+    modGUI.CollegamentoNav('Gruppo 3',  'javascript:void(0)', true, 'primo');
+end ApriMenuGruppo3;
+
+procedure ChiudiMenuGruppo3(idSessione int) IS
+BEGIN
+    modGUI.ChiudiCollegamentoSubNav;
+
+    htp.print('<li class="dropdown">
+        <button class="dropbtn"><i class="fa fa-user"></i>&nbsp; '|| login.getUnameFromSession(idSessione) ||' |&nbsp;'|| login.getRoleFromSession(idSessione) ||' </a></button>');
+        modGUI.ApriDiv(classe => 'dropdown-content');
+            modGUI.Collegamento('<i class="fas fa-user-circle"></i>&nbsp; Profilo',  Costanti.server || Costanti.root || Costanti.profilo3 || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fa fa-shopping-bag"></i>&nbsp; Ordini',  Costanti.server || Costanti.root || Costanti.ordini || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fas fa-comment-dots"></i>&nbsp; Recensioni',  Costanti.server || Costanti.root || Costanti.recensioni || '?idSessione=' || idSessione);
+            modGUI.ApriFormHidden(Costanti.server || Costanti.root || 'login.logout', IDSESSIONE, ident => 'esci');
+            htp.prn('<a href="javascript:void(0)" onclick="sbmt()"><i class="fa fa-sign-out"></i>&nbsp; Logout</i></a>');
+            modGUI.ChiudiFormHidden;
+        modGUI.ChiudiDiv;
+    htp.print('</li><li class="hide2">');
+        htp.print('<i id="hamb-icon" class="fas fa-bars" onclick="openNav('|| Costanti.mySidenav ||')"></i>');
+
+    htp.print('</li></ul></nav>');
+
+	modGUI.ChiudiDiv;
+END ChiudiMenuGruppo3;
 
 procedure ApriMenuLat(idSessione int, ident varchar2 default '', subMenu boolean default false, parentName varchar2 default '') is
 begin
@@ -101,6 +213,60 @@ begin
     modGUI.ApriDiv(classe => 'nav-list');
 end ApriMenuLat;
 
+procedure MenuLatGruppo1(idSessione int, indirizzo varchar2) is
+begin
+    htp.prn('<div id="' || 'mySidenav' || '" class="sidenav hide2" style="width: 0">');
+    
+      htp.prn('<a href="javascript:void(0)" class="closebtn" onclick="closeNav(this.parentElement)">&times;</a>');
+      modGUI.ApriDiv(classe => 'nav-title-box');
+        htp.prn('<span class="nav-list-title">Main Menu</span>');
+      modGUI.ChiudiDiv;
+
+      modGUI.ApriDiv(classe => 'nav-list');
+        modGUI.Collegamento('Home', indirizzo || '?idSessione=' || idSessione);
+        modGUI.Collegamento('Gruppo 1', Costanti.subMenuGruppo1, true);
+        modGUI.Collegamento('Gruppo 2', 'javascript:void(0)');
+        modGUI.Collegamento('Gruppo 3', 'javascript:void(0)');
+      modGUI.ChiudiDiv;
+      modGUI.ChiudiDiv;
+end MenuLatGruppo1;
+
+procedure MenuLatGruppo2(idSessione int, indirizzo varchar2) is
+begin
+    htp.prn('<div id="' || 'mySidenav' || '" class="sidenav hide2" style="width: 0">');
+    
+      htp.prn('<a href="javascript:void(0)" class="closebtn" onclick="closeNav(this.parentElement)">&times;</a>');
+      modGUI.ApriDiv(classe => 'nav-title-box');
+        htp.prn('<span class="nav-list-title">Main Menu</span>');
+      modGUI.ChiudiDiv;
+
+      modGUI.ApriDiv(classe => 'nav-list');
+        modGUI.Collegamento('Home', indirizzo || '?idSessione=' || idSessione);
+        modGUI.Collegamento('Gruppo 1', 'javascript:void(0)');
+        modGUI.Collegamento('Gruppo 2', Costanti.subMenuGruppo2, true);
+        modGUI.Collegamento('Gruppo 3', 'javascript:void(0)');
+      modGUI.ChiudiDiv;
+      modGUI.ChiudiDiv;
+end MenuLatGruppo2;
+
+procedure MenuLatGruppo3(idSessione int, indirizzo varchar2) is
+begin
+    htp.prn('<div id="' || 'mySidenav' || '" class="sidenav hide2" style="width: 0">');
+    
+      htp.prn('<a href="javascript:void(0)" class="closebtn" onclick="closeNav(this.parentElement)">&times;</a>');
+      modGUI.ApriDiv(classe => 'nav-title-box');
+        htp.prn('<span class="nav-list-title">Main Menu</span>');
+      modGUI.ChiudiDiv;
+
+      modGUI.ApriDiv(classe => 'nav-list');
+        modGUI.Collegamento('Home', indirizzo || '?idSessione=' || idSessione);
+        modGUI.Collegamento('Gruppo 1', 'javascript:void(0)');
+        modGUI.Collegamento('Gruppo 2', 'javascript:void(0)');
+        modGUI.Collegamento('Gruppo 3', Costanti.subMenuGruppo3, true);
+      modGUI.ChiudiDiv;
+      modGUI.ChiudiDiv;
+end MenuLatGruppo3;
+
 procedure ChiudiMenuLat is
 begin
     modGUI.ChiudiDiv;
@@ -112,10 +278,12 @@ begin
     htp.print('<li class="dropdown">
         <button class="dropbtn"><i class="fa fa-user"></i>&nbsp; Mario R. | &nbsp;Birraio </a></button>');
         modGUI.ApriDiv(classe => 'dropdown-content');
-            modGUI.Collegamento('<i class="fas fa-user-circle"></i>&nbsp; Profilo',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
-            modGUI.Collegamento('<i class="fas fa-coins"></i>&nbsp; Vendite',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
-            modGUI.Collegamento('<i class="fa fa-shopping-bag"></i>&nbsp; Acquisti',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
-            modGUI.Collegamento('<i class="fa fa-sign-out"></i>&nbsp; Logout',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fas fa-user-circle"></i>&nbsp; Profilo',  Costanti.server || Costanti.root || Costanti.home || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fas fa-coins"></i>&nbsp; Vendite',  Costanti.server || Costanti.root || Costanti.home || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fa fa-shopping-bag"></i>&nbsp; Acquisti',  Costanti.server || Costanti.root || Costanti.home || '?idSessione=' || idSessione);
+            modGUI.ApriFormHidden(Costanti.server || Costanti.root || 'login.logout', IDSESSIONE, ident => 'esci');
+            htp.prn('<a href="javascript:void(0)" onclick="sbmt()"><i class="fa fa-sign-out"></i>&nbsp; Logout</i></a>');
+            modGUI.ChiudiFormHidden;
         modGUI.ChiudiDiv;
     htp.print('</li><li class="hide2">');
         htp.print('<i id="hamb-icon" class="fas fa-bars" onclick="openNav('|| Costanti.mySidenav ||')"></i>');
@@ -127,7 +295,9 @@ end ChiudiMenuNav;
 
 
 procedure CreaMenuPrincipale(idSessione int) is
+  nomeutente sessioni.uname%type;
 begin
+
 	 modGUI.ApriDiv(ident => 'mySidenav',classe => 'sidenav hide2');
         htp.print('<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>');
         modGUI.ApriDiv(classe => 'nav-list');
@@ -162,13 +332,15 @@ begin
         htp.print('</li><li class="hide1">');
 		modGUI.Collegamento('Carrello', Costanti.server || Costanti.root || Costanti.carrello || '?idSessione=' || idSessione);
 	end if;
-    htp.print('</li><li class="dropdown">
-        <button class="dropbtn"><i class="fa fa-user"></i>&nbsp; Mario R. | &nbsp;Birraio </a></button>');
+   htp.print('</li><li class="dropdown">
+        <button class="dropbtn"><i class="fa fa-user"></i>&nbsp; '|| login.getUnameFromSession(idSessione) ||' | &nbsp; '|| login.getRoleFromSession(idSessione) ||'</a></button>');
         modGUI.ApriDiv(classe => 'dropdown-content');
-            modGUI.Collegamento('<i class="fas fa-user-circle"></i>&nbsp; Profilo',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
-            modGUI.Collegamento('<i class="fas fa-coins"></i>&nbsp; Vendite',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
-            modGUI.Collegamento('<i class="fa fa-shopping-bag"></i>&nbsp; Acquisti',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
-            modGUI.Collegamento('<i class="fa fa-sign-out"></i>&nbsp; Logout',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fas fa-user-circle"></i>&nbsp; Profilo',  Costanti.server || Costanti.root || Costanti.home || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fas fa-coins"></i>&nbsp; Vendite',  Costanti.server || Costanti.root || Costanti.home || '?idSessione=' || idSessione);
+            modGUI.Collegamento('<i class="fa fa-shopping-bag"></i>&nbsp; Acquisti',  Costanti.server || Costanti.root || Costanti.home || '?idSessione=' || idSessione);
+            modGUI.ApriFormHidden(Costanti.server || Costanti.root || 'login.logout', IDSESSIONE, ident => 'esci');
+            htp.prn('<a href="javascript:void(0)" onclick="sbmt()"><i class="fa fa-sign-out"></i>&nbsp; Logout</i></a>');
+            modGUI.ChiudiFormHidden;
         modGUI.ChiudiDiv;
     htp.print('</li><li class="hide2">');
         htp.print('<i id="hamb-icon" class="fas fa-bars" onclick="openNav()"></i>');
@@ -228,7 +400,9 @@ begin
             modGUI.Collegamento('<i class="fas fa-user-circle"></i>&nbsp; Profilo',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
             modGUI.Collegamento('<i class="fas fa-coins"></i>&nbsp; Vendite',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
             modGUI.Collegamento('<i class="fa fa-shopping-bag"></i>&nbsp; Acquisti',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
-            modGUI.Collegamento('<i class="fa fa-sign-out"></i>&nbsp; Logout',  Costanti.server || Costanti.root || Costanti.gruppo2 || '?idSessione=' || idSessione);
+            modGUI.ApriFormHidden(Costanti.server || Costanti.root || 'login.logout', IDSESSIONE, ident => 'esci');
+            htp.prn('<a href="javascript:void(0)" onclick="sbmt()"><i class="fa fa-sign-out"></i>&nbsp; Logout</i></a>');
+            modGUI.ChiudiFormHidden;
         modGUI.ChiudiDiv;
     htp.print('</li><li class="hide2">');
         htp.print('<i id="hamb-icon" class="fas fa-bars" onclick="openNav(' || Costanti.mySidenav ||')"></i>');
@@ -384,9 +558,9 @@ begin
 
 end Bottone;
 
-procedure ApriFormHidden(azione varchar2, idSessione int default -1) is
+procedure ApriFormHidden(azione varchar2, idSessione int default -1, ident varchar2 default '', classe varchar2 default '') is
 begin
-  htp.formOpen(azione, 'GET');
+  htp.prn('<form action="'|| azione ||'" method="get" id="'|| ident ||'" classe="'|| classe ||'">');
   
   if (idSessione <> -1) then
 	modGUI.PassaParametro('idSessione', to_char(idSessione)); -- -> ?idSessione=value
