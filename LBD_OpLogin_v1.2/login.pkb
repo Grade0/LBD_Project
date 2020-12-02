@@ -1,4 +1,40 @@
-create PACKAGE BODY LOGIN AS
+create or replace PACKAGE BODY LOGIN AS
+
+-- FUNZIONI AGGIUNGE RISPETTO ALLA VERSIONE 1.1
+  function getUnameFromSession(idSessione int) return varchar2 is 
+    CURSOR r is SELECT UNAME FROM SESSIONI WHERE idSessione = SESSIONI.IDSESSIONE;
+      v_record r%ROWTYPE;
+      begin
+        open r;
+        fetch r into v_record;
+        if r%rowcount = 0 then
+          close r;
+          return null;
+        else
+          close r;
+          return v_record.UNAME;
+        end if;
+      end;
+
+
+-- FUNZIONI AGGIUNTE RISPETTO ALLA VERSIONE 1.0
+    function getRoleFromSession(idSessione int) return varchar2 is 
+    CURSOR r is SELECT RUOLO FROM SESSIONI,UTENTI WHERE idSessione = SESSIONI.IDSESSIONE and SESSIONI.UNAME = UTENTI.Uname;
+      v_record r%ROWTYPE;
+      begin
+        open r;
+        fetch r into v_record;
+        if r%rowcount = 0 then
+          close r;
+          return null;
+        else
+          close r;
+          return v_record.RUOLO;
+        end if;
+      end;
+
+-- END
+
 
     function isLogged(Usrname varchar2) return boolean is
       CURSOR r is SELECT * FROM SESSIONI WHERE UNAME = Usrname;
@@ -33,19 +69,19 @@ create PACKAGE BODY LOGIN AS
     procedure login is
 begin
 	modGUI.ApriPagina('Login', 0);
-	modGUI.Intestazione(1, 'Inserire credenziali');
-	modGUI.RitCarrello;
+	-- modGUI.Intestazione(1, 'Inserire credenziali');
+	-- modGUI.RitCarrello;
   
-	modGUI.ApriForm(costanti.root || 'login.checkLogin', 'checklogin' );
-	modGUI.CasellaDiTesto('Usr', 'Username','Username','',15,'text',true);
-	modGUI.CampoPassword('Pwd', 'Password','Password','',true);
-  modgui.apriblocco;
-	modGUI.Bottone('Login');
-  modGUI.CHIUDIBLOCCO;
-	modGUI.ChiudiForm();
+	-- modGUI.ApriForm(costanti.root || 'login.checkLogin', 'checklogin' );
+	-- modGUI.CasellaDiTesto('Usr', 'Username','Username','',15,'text',true);
+	-- modGUI.CampoPassword('Pwd', 'Password','Password','',true);
+  -- modgui.apriblocco;
+	-- modGUI.Bottone('Login');
+  -- modGUI.CHIUDIBLOCCO;
+	-- modGUI.ChiudiForm();
 	
-	modGUI.ChiudiPagina;
-  htp.print('<script> document.getElementsByClassName("logButtonsDiv")[0].childNodes[0].remove() </script>');
+	-- modGUI.ChiudiPagina;
+  -- htp.print('<script> document.getElementsByClassName("logButtonsDiv")[0].childNodes[0].remove() </script>');
 	
 end login;
 

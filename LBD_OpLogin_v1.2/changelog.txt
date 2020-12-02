@@ -1,0 +1,6 @@
+v1.1 :
+    - Adattamento procedure alla nuova interfaccia grafica.
+    - Aggiunta della funzione getRoleFromSession .
+
+v1.2 :
+    - Aggiunta edlla funzione getUnameFromSession.
