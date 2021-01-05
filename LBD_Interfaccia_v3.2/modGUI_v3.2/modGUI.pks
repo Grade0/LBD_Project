@@ -12,29 +12,11 @@ procedure ApriPagina(titolo varchar2 default 'Senza titolo', idSessione int defa
 
 procedure ApriBody(idSessione int default 0);
 
-------------- AGGIUNTO -------------------
-procedure ApriMenuNav(idSessione int, indirizzo varchar2);
-procedure ApriMenuGruppo1(idSessione int, indirizzo varchar2);
-procedure ApriMenuGruppo2(idSessione int, indirizzo varchar2);
-procedure ApriMenuGruppo3(idSessione int, indirizzo varchar2);
-procedure ChiudiMenuGruppo1(idSessione int);
-procedure ChiudiMenuGruppo2(idSessione int);
-procedure ChiudiMenuGruppo3(idSessione int);
-procedure ChiudiMenuNav(idSessione int);
 procedure ApriMenuLat(idSessione int, ident varchar2 default '', subMenu boolean default false, parentName varchar2 default '');
+
 procedure ChiudiMenuLat;
-procedure MenuLatGruppo1(idSessione int, indirizzo varchar2);
-procedure MenuLatGruppo2(idSessione int, indirizzo varchar2);
-procedure MenuLatGruppo3(idSessione int, indirizzo varchar2);
-------------------------------------------
 
 procedure CreaMenuPrincipale(idSessione int);
-
-procedure CreaMenuBackOffice(idSessione int);
-
-procedure InserisciLoginERegistrati;
-
-procedure InserisciLogout(idSessione int);
 
 procedure Intestazione(tipo int, testo varchar2, ident varchar2 default '', classe varchar2 default '');
 
@@ -51,17 +33,16 @@ procedure ApriFormHidden(azione varchar2, idSessione int default -1, ident varch
 procedure ChiudiFormHidden;
 
 procedure ApriDiv(ident varchar2 default '', classe varchar2 default '');
+
 procedure ChiudiDiv;
+
 procedure Paragrafo(testo varchar2, ident varchar2 default '', classe varchar2 default '');
 
---------------------- MODIFICATO ---------------
 procedure Collegamento(testo varchar2, indirizzo varchar2, hasSub boolean default false);
-------------------------------------------------
 
---------------------- AGGIUNTO ------------------
 procedure CollegamentoNav(testo varchar2, indirizzo varchar2, hasSub boolean default false, tipoSub varchar2 default '');
+
 procedure ChiudiCollegamentoSubNav;
--------------------------------------------------
 
 procedure Bottone(testo varchar2 default '', nome varchar2 default '', valore varchar2 default '', ident varchar2 default '', classe varchar2 default '');
 
@@ -98,7 +79,8 @@ procedure ChiudiSelect;
 
 procedure ApriInlineSelect(nome varchar2);
 
-procedure ChiudiInlineSelectConBottone;
+------- MODIFICATO -----------
+procedure ChiudiInlineSelect;
 
 procedure AggiungiOpzioneSelect(Valore varchar2, Etichetta varchar2, Selezionato boolean default false);
 
@@ -115,8 +97,6 @@ procedure PassaParametro(nome varchar2, valore varchar2 default null);
 
 procedure StringaDiTesto(testo varchar2);
 
-
----UGUALE
 procedure ApriTabella;
 
 procedure ChiudiTabella;
@@ -154,7 +134,5 @@ procedure PaginaFeedback(
 procedure PaginaOspiti;
 
 procedure PaginaPrincipale(idSessione int);
-
-procedure PaginaPrincipaleBackoffice(idSessione int);
 
 end modGUI;

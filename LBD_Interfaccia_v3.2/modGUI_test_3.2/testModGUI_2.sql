@@ -1,7 +1,6 @@
-create or replace procedure testModGUI_2 is
+CREATE OR REPLACE procedure testModGUI_2 is
 begin
   modGUI.APRIPAGINA('test', 5); --idSessione == 0 => sessione ospite
-  modGUI.CREAMENUPRINCIPALE(1);
   modGUI.Intestazione(1, 'Esempio di utilizzo di modGUI');
 
 
@@ -31,8 +30,8 @@ begin
   modGUI.AGGIUNGIOPZIONESELECT('2','2');
   modGUI.AGGIUNGIOPZIONESELECT('3','3',true);
   modGUI.AGGIUNGIOPZIONESELECT('4','4');	
-	modGUi.ChiudiInlineSelectConBottone;
-
+	modGUi.ChiudiInlineSelect;
+	MODGUI.bottoneConfirm;
   modgui.ChiudiFormHidden;
   modGUI.ChiudiElementoTabella;
 

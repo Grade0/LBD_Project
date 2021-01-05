@@ -3,6 +3,29 @@
 ****************************************************************************
 
 -----------------------------------
+-------------- v3.2 ---------------
+-----------------------------------
+- Modificato i seguenti files modGUI.pks, modGUI.pkb, Costanti.pks, Guida_modGUI_v3.1.pdf
+- Eliminato le procedure MenuGruppo1, MenuGruppo2, MenuGruppo3, MenuAdmin, ApriMenuNav, ChiudiMenuNav, testmodGUI_6, testmodGUI_7
+- Il meccanismo di gestione dei link del menu di navigazione (ovvero quali ruoli possono vedere apparire determinate operazioni) è ora interamente gestita dal pacchetto menuGruppi
+
+-----------------------------------
+-------------- v3.1 ---------------
+-----------------------------------
+- Modificato i seguenti files modGUI.pks, modGUI.pkb, Costanti.pks, testmodGUI_3.sql, Guida_modGUI_v3.1.pdf
+- Modificato la procedura ChiudiInlineSelectConBottone in ChiudiInlineSelect (adesso il bottone si aggiunge manualmente secondo le necessità)
+
+-----------------------------------
+-------------- v3.0 ---------------
+-----------------------------------
+- Eliminato le procedure CreaMenuBackOffice, PaginaPrincipaleBackOffice, MenuLatGruppo1, MenuLatGruppo2, MenuLatGruppo3, ChiudiMenuGruppo1, ChiudiMenuGruppo2, ChiudiMenuGruppo3, InserisciLogout, InserisciLoginERegistrati
+- Modificato le procedure ApriMenuGruppo1 in MenuGruppo1 per i 3 gruppi
+- Aggiunto le procedure MenuAdmin
+- Aggiunto il package menuGruppi.pks e menuGruppi.pkb per la personalizzazione del menu a tendina dei vari gruppi
+- Aggiornato quindi i seguenti file modGUI.pks, modGUI.pkb, Costanti.pks, Guida_modGUI.pdf
+- NB.: Non si deve più chiamare esplicitamente le procedure CreaMenuBackOffice (poiché eliminato) e CreaMenuPrincipale (poiché viene chiamato automaticamente da ApriPagina)
+
+-----------------------------------
 -------------- v2.4 ---------------
 -----------------------------------
 - Miglioramenti vari

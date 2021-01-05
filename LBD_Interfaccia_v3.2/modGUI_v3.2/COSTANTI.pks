@@ -145,6 +145,7 @@ if its not present, dont show loader */
 
 /* ------ Main Page ------ */
 
+
 .imglogo {
   height: 50px;
   margin-right: 10px;
@@ -587,6 +588,11 @@ width:150px;
   margin-left: 45px;
   display: inline-block;
 }
+
+.footer {
+  height: 100px;
+}
+
 ';
 
 
@@ -680,6 +686,7 @@ boot constant varchar2(32767) :=
   background-image:none;
   border:1px solid rgba(35,42,48,0.8);
   border-radius:25px;
+  outline: none
 }
 
 .form-login {
@@ -735,194 +742,174 @@ input[type="checkbox"], input[type="radio"]{
 
 script constant varchar2(32767) :=
 '
-        function sbmt() {
-          document.getElementById("esci").submit();
-        }
-        
-        
-        /* Set the width of the side navigation to 300px */
-        function openNav(id_var) {
-            document.getElementById(id_var).style.width = "300px";
-        }
+  function sbmt() {
+    document.getElementById("esci").submit();
+  }
+  
+  
+  /* Set the width of the side navigation to 300px */
+  function openNav(id_var) {
+      document.getElementById(id_var).style.width = "300px";
+  }
 
-        /* Set the width of the side navigation to 0 */
-        function closeNav(elem) {
-            elem.style.width = "0";
-        }
+  /* Set the width of the side navigation to 0 */
+  function closeNav(elem) {
+      elem.style.width = "0";
+  }
 
-        function checkText(value) {
-            if (value.length == 0)
-                return true;
-            var regexp = /^[a-z]+$/i;
-            return regexp.test(value);
-        }
-
-
-        function checkNumber(value) {
-            if (value.length == 0)
-                return true;
-            var regexp = /^[0-9]+$/;
-            return regexp.test(value);
-        }
-
-        function checkMail(value) {
-            if (value.length == 0)
-                return true;
-            var regexp = /^[-a-z0-9~!$%^&*_=+}{\''?]+(\.[-a-z0-9~!$%^&*_=+}{\''?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
-            return regexp.test(value);
-        }
-
-        
-        function checkCF(value){
-            if(value.length == 0)
-              return true;
-            var regexp = /^[a-z0-9]+$/i;
-            return regexp.test(value);
-            }
-        function resetStyle(idForm)
-        {
-
-            var input = document.forms[idForm].getElementsByTagName("input");
-            var N = input.length;
-            for(var i=0;i<N;i++)
-                input[i].style.borderColor = "#CCC";
-            
-        }
-
-        function validateForm(idForm) {
-
-            console.log("Validation..");
-            var correct = true;
+  function checkText(value) {
+      if (value.length == 0)
+          return true;
+      var regexp = /^[a-z  *,;:]+$/i;
+      return regexp.test(value);
+  }
 
 
-            var fields = document.forms[idForm].getElementsByTagName("input");
+  function checkNumber(value) {
+      if (value.length == 0)
+          return true;
+      var regexp = /^[0-9]+$/;
+      return regexp.test(value);
+  }
 
-            var N = fields.length;
+  function checkMail(value) {
+      if (value.length == 0)
+          return true;
+      var regexp = /^[-a-z0-9~!$%^&*_=+}{\''?]+(\.[-a-z0-9~!$%^&*_=+}{\''?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
+      return regexp.test(value);
+  }
 
-            for(var i=0;i<N;i++) {
+  
+  function checkCF(value){
+      if(value.length == 0)
+        return true;
+      var regexp = /^[a-z0-9  *,;:]+$/i;
+      return regexp.test(value);
+      }
+  function resetStyle(idForm)
+  {
+
+      var input = document.forms[idForm].getElementsByTagName("input");
+      var N = input.length;
+      for(var i=0;i<N;i++)
+          input[i].style.borderColor = "#CCC";
+      
+  }
+
+  function validateForm(idForm) {
+
+      console.log("Validation..");
+      var correct = true;
+
+
+      var fields = document.forms[idForm].getElementsByTagName("input");
+
+      var N = fields.length;
+
+      for(var i=0;i<N;i++) {
+          
+          var input = fields[i];
+          var classes = input.className.split(" ");
+
+          var type = classes[0].trim().toLowerCase();
+          var check= classes[1];
+          var required = (check == ''required'');
+
+          console.log(required);
+          switch (type) {
+              
+              case ("text"):
+                  console.log(input.value);
                 
-                var input = fields[i];
-                var classes = input.className.split(" ");
+                  if ( (required && input.value.length == 0) || (!checkText(input.value))) {
+                      input.style.border="2px solid #ff0000 ";
+                      correct = false;
+                  }
 
-                var type = classes[0].trim().toLowerCase();
-                var check= classes[1];
-                var required = (check == ''required'');
+                  else {
+                      input.style.borderColor = "#232a30";
+                  }
 
-                console.log(required);
-                switch (type) {
-                   
-                    case ("text"):
-                        console.log(input.value);
-                     
-                        if ( (required && input.value.length == 0) || (!checkText(input.value))) {
-                            input.style.border="2px solid #ff0000 ";
-                            correct = false;
-                        }
+                  break;
+              case ("number"):
+                  console.log(input.value);
+                  if ( (required && input.value.length == 0) || (!checkNumber(input.value))) {
 
-                        else {
-                            input.style.borderColor = "#232a30";
-                        }
-
-                        break;
-                    case ("number"):
-                        console.log(input.value);
-                        if ( (required && input.value.length == 0) || (!checkNumber(input.value))) {
-
-                            input.style.border = "2px solid #ff0000 ";
-                            
-                            correct = false;
-                        }
-
-                        else {
-                            input.style.borderColor = "#232a30";
-                        }
-                        break;
-
-                    case ("mail"):
-                        if ( (required  && input.value.length == 0) || (!checkMail(input.value))) {
-
-                            input.style.border = "2px solid #ff0000";
-
-                            correct = false;
-                        }
-
-                        else {
-                            input.style.borderColor = "#232a30";
-                        }
-                        break;
-                        
-                    
-                    case("password"):
-                      if ( (required  && input.value.length == 0)) {
-
-                            input.style.border = "2px solid #ff0000 ";
-                            
-                            correct = false;
-                        }
-
-                        else {
-                            input.style.borderColor = "#232a30";
-                        }
-                        break;
+                      input.style.border = "2px solid #ff0000 ";
                       
-                    case ("alfa"):
-                        console.log(input.value);
-                        if ( (required  && input.value.length == 0) || (!checkCF(input.value))) {
+                      correct = false;
+                  }
 
-                            input.style.border = "2px solid #ff0000 ";
-                            
-                            correct = false;
-                        }
+                  else {
+                      input.style.borderColor = "#232a30";
+                  }
+                  break;
 
-                        else {
-                            input.style.borderColor = "#232a30";
-                        }
-                        break;
+              case ("mail"):
+                  if ( (required  && input.value.length == 0) || (!checkMail(input.value))) {
 
-                }
+                      input.style.border = "2px solid #ff0000";
 
-            }
+                      correct = false;
+                  }
 
-            return correct;
-        }';
+                  else {
+                      input.style.borderColor = "#232a30";
+                  }
+                  break;
+                  
+              
+              case("password"):
+                if ( (required  && input.value.length == 0)) {
+
+                      input.style.border = "2px solid #ff0000 ";
+                      
+                      correct = false;
+                  }
+
+                  else {
+                      input.style.borderColor = "#232a30";
+                  }
+                  break;
+                
+              case ("alfa"):
+                  console.log(input.value);
+                  if ( (required  && input.value.length == 0) || (!checkCF(input.value))) {
+
+                      input.style.border = "2px solid #ff0000 ";
+                      
+                      correct = false;
+                  }
+
+                  else {
+                      input.style.borderColor = "#232a30";
+                  }
+                  break;
+
+          }
+
+      }
+
+      return correct;
+  }';
 
 
 root constant VARCHAR2(20) := '/apex/davide.'; -- DA SOSTITUIRE (N.B. INCLUDERE IL PUNTO FINALE!!!)
 server constant VARCHAR2(50) := 'http://131.114.73.203:8080';
-interfaccia constant VARCHAR2(50) := '/apex/davide.'; -- DA SOSTITUIRE (N.B. INCLUDERE IL PUNTO FINALE!!!)
 
 -- Non modificare
 -- IMPORTANTE NON INSERIRE SPAZI E LASCIARE INALTERATO IL PATTERN q'['']'
 mySidenav constant VARCHAR(20) := q'['mySidenav']'; 
 
-/* Operazioni menù principale */
-/* NOTA: si tratta delle operazioni da invocare a seguito del click sulle voci del menù principale */
-home constant VARCHAR2(500) := 'nomeOperazione';
-subMenuGruppo1 constant VARCHAR2(500) := 'nomeOperazione';
-subMenuGruppo2 constant VARCHAR2(500) := 'nomeOperazione';
-subMenuGruppo3 constant VARCHAR2(500) := 'nomeOperazione';
-carrello constant VARCHAR2(500) := 'Gruppo3.visualizzaCarrello';
-
-/* Operazioni menù utente */
 /*gruppo1*/
 profilo1 constant VARCHAR2(500) := 'nomeOperazione';
-inventario constant VARCHAR2(500) := 'nomeOperazione';
-ricette constant VARCHAR2(500) := 'nomeOperazione';
 
 /*gruppo2*/
 profilo2 constant VARCHAR2(500) := 'nomeOperazione';
-vendite constant VARCHAR2(500) := 'nomeOperazione';
-prodotti constant VARCHAR2(500) := 'nomeOperazione';
 
 /*gruppo3*/
-profilo3 constant VARCHAR2(500) := 'nomeOperazione';
-ordini constant VARCHAR2(500) := 'nomeOperazione';
-recensioni constant VARCHAR2(500) := 'nomeOperazione';
+profilo3 constant VARCHAR2(500) := 'gruppo3.visualizzaCliente';
 
-gruppo1 constant VARCHAR2(500) := 'nomeOperazione';
-gruppo2 constant VARCHAR2(500) := 'nomeOperazione';
-gruppo3 constant VARCHAR2(500) := 'nomeOperazione';
-
-titoloApplicazione constant VARCHAR2(100) := 'Laboratorio di Basi di Dati 2020';
+titoloApplicazione constant VARCHAR2(100) := 'Una Cervecita Fresca';
 
 END COSTANTI;
