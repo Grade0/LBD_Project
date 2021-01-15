@@ -1,0 +1,11 @@
+v1.1 :
+    - Adattamento procedure alla nuova interfaccia grafica.
+    - Aggiunta della funzione getRoleFromSession .
+
+v1.2 :
+    - Aggiunta edlla funzione getUnameFromSession.
+
+v1.3 :
+    - Correzione incoerenze nella SELECT di getRoleFromSession e getUnameFromSession.
+v1.4 :
+    - Correzione bug checkLogin con autenticazione valida con Pwd qualunque.
