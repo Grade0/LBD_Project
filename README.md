@@ -1,4 +1,4 @@
-# LabBD
+# LBD_TeamProject
 "Database Laboratory" Class Team Project - University of Pisa
 
 **Click [[here](/ProgettoLBD_IT.pdf)] for Italian version**
