@@ -18,7 +18,7 @@ The aim of this project is to develop an application for home brewers that allow
 * produce shopping lists for the next batch;
 
 ### Project goal
-Creation of an ORACLE Database complete with analysis, data design and implementation of procedures and interface for the web application 'Una Cervecita Fresca'.
+Creation of an **ORACLE Database** complete with analysis, data design and implementation of procedures and interface for the web application 'Una Cervecita Fresca'.
 
 ### Project description
 “Una cervecita fresca” is an application that allows amateur brewers to maintain an organized database of their beer recipes. The application allows users to create, store and edit recipes, and then delete them, if the user wishes to do so. The application is intended for brewers of all methodology: all-grain, extract and mixed, and therefore all recipes are for these types of beers.
