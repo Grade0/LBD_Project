@@ -1,45 +1,43 @@
 # LabBD
 "Database Laboratory" Class Team Project - University of Pisa
 
+Click [[here](/ProgettoLBD_IT.pdf)
 
 **Team:** Betola Gianmarco, Catania Saverio, Chen Davide, Li Malio, Pardini Luca, Stasula Ruslan
 
 ## Una Cervecita Fresca  
 
-La birra fatta in casa è un'attività che riceve crescente attenzione da parte degli appassionati. Ogni birraio amatoriale possiede un'attrezzatura per il processo di produzione della birra su piccola  scala  (bollitori,  fermentatori,  tubi,  ecc.)  con  una  certa  capacità  massima  di fermentazione: il numero di litri che l'attrezzatura è in grado di gestire in un unico "lotto". La preparazione della birra richiede anche ingredienti, le cui quantità effettive variano da una ricetta all'altra, questi sono vari tipi di malto, luppolo, lieviti e zuccheri (e, naturalmente, acqua). 
+Home brewing is an activity that receives increasing attention from enthusiasts. 
+Every amateur brewer owns equipment for the small-scale brewing process (kettles, fermenters, pipes, etc.) with a certain maximum fermentation capacity: the number of liters that the equipment is able to manage in a single "batch". Brewing also requires ingredients, the actual amounts of which vary from recipe to recipe, these are various types of malt, hops, yeast and sugar (and, of course, water).
 
-Ai  birrai  piace  registrare  le  proprie  ricette  per  riferimento  futuro  e  mantenere  un  elenco aggiornato degli ingredienti disponibili per fare acquisti prima della successiva produzione.
+Brewers like to register their recipes for future reference and keep an up-to-date list of available ingredients to make purchases before the next production.
 
-L'obiettivo di questo progetto è quello di sviluppare un'applicazione per i birrai domestici che consenta loro di mantenere un elenco di ricette e adattare quelle esistenti. L'applicazione deve anche: 
-* mantenere un elenco di ingredienti disponibili;
-* aggiornare questo elenco dopo un ciclo di produzione e quando vengono acquistati nuovi ingredienti; 
-* produrre liste della spesa per il lotto successivo;
-<br>
+The aim of this project is to develop an application for home brewers that allows them to maintain a list of recipes and adapt existing ones. The application shall also:
+* maintain a list of available ingredients;
+* update that list after a production cycle and when new ingredients are purchased;
+* produce shopping lists for the next batch;
 
-**Scopo del progetto**
+### Project goal
+Creation of an ORACLE Database complete with analysis, data design and implementation of procedures and interface for the web application 'Una Cervecita Fresca'.
 
-Realizzazione di un Database ORACLE completo di analisi, progettazione dei dati e realizzazione di procedure ed interfaccia per l'applicazione web 'Una Cervecita Fresca'.
-<br>  
+### Project description
+“Una cervecita fresca” is an application that allows amateur brewers to maintain an organized database of their beer recipes. The application allows users to create, store and edit recipes, and then delete them, if the user wishes to do so. The application is intended for brewers of all methodology: all-grain, extract and mixed, and therefore all recipes are for these types of beers.
 
-**Descrizione del progetto**
+Each domestic brewery has specific equipment, the characteristics of which lead to a particular "batch size": the maximum number of liters that can be produced in a single production. In addition to water, the recipes include:
+* malts
+* hop
+* yeasts
+* sugars
+* additives
 
-“Una  cervecita  fresca”  è  un'applicazione  che  consente  ai  produttori  amatoriali  di  birra  di mantenere un database organizzato delle loro ricette di birra. L'applicazione consente agli utenti  di  creare,  archiviare  e  modificare  ricette,  e  successivamente  eliminarle,  se  l'utente desidera  farlo.  L'applicazione  è  destinata  solo  ai  produttori  di  birra  con  metodo  all-grain (https://www.birradegliamici.com/fare-la-birra/all-grain/),  e  quindi  tutte  le  ricette  sono  per questo tipo di birre (le birre "estratto" non sono supportate).
+While beer producers prefer to create recipes referring to concrete values, such as kilograms of a particular malt or grams of a particular hops, The application must store these recipes in an "absolute" measure, which allows a direct conversion of the recipe when the equipment, and consequently the batch size, is different. For example, one option is to express the amount of malt as a percentage of the total and to use grams per litre of mixture (mash) for hops.
 
-Ogni birrificio domestico dispone di un'attrezzatura specifica, le cui caratteristiche portano a una particolare "dimensione del lotto": il numero massimo di litri che possono essere prodotti in una singola produzione. Le ricette prevedono, oltre all'acqua:
-* malti
-* luppolo
-* lieviti
-* zuccheri
-* additivi
+In addition to the recipes, the application must keep the instances of the recipe, ie single productions based on a recipe; these instances can be accompanied by notes to refer to issues that may affect the resulting beer, notes that brewers would like to remain memorized. A particular type of note is the tasting notes, which allow brewers to keep track of opinions about a beer in a given batch. A particular type of note is the tasting notes, which allow brewers to keep track of opinions about a beer in a given batch. 
 
-Mentre  i  produttori  di  birra  preferiscono  creare  ricette  riferendosi  a  valori  concreti,  come chilogrammi di un particolare malto o grammi di un particolare luppolo, l'applicazione deve memorizzare queste ricette in una misura "assoluta", che consente una conversione diretta della ricetta quando l'apparecchiatura, e di conseguenza la dimensione del lotto, è diversa. Ad esempio, una possibilità è esprimere la quantità di malto in percentuale del totale e usare i grammi per litro di miscuglio (mash) per il luppolo.
+In addition to these more traditional features, the application "Una cervecita fresca", maintains a list of available ingredients. This allows the brewers to have the list of missing ingredients for the next production. 
+A recipe instance, i.e. a beer production, should allow users to update the list of available ingredients by subtracting the used ingredients from the available ones.
 
-Oltre  alle  ricette,  l'applicazione  deve  conservare  le istanzedella  ricetta,  ovvero  singole produzioni basate su una ricetta; queste istanze possono essere accompagnate da note per fare riferimento a problemi che possono influire sulla birra risultante, note che i produttori di birra  vorrebbero  rimanessero  memorizzate.  Un  particolare  tipo  di  nota  sono  le  note  di degustazione, che consentono ai birrai di tenere traccia delle opinioni su una birra di un dato lotto.
+It will also be possible for brewers to sell brewed beer. **The application must offer a web interface for booking and selling.** A registered customer can reserve a batch of beer in production, or part of it. When the batch has been produced, the brewer can confirm the reservations and proceed with the sale or, if he is not satisfied with the product, cancel them, so as not to damage his good name. Unreserved beer can be offered for sale and bought by registered users.
 
-Oltre a queste funzionalità più tradizionali, l'applicazione “Una cervecita fresca”, mantiene un elenco  di  ingredienti  disponibili.  Ciò  consente  ai  birrai  di  avere la  lista  degli  ingredienti mancanti per la prossima produzione. Un'istanza della ricetta, ovvero una produzione di birra, dovrebbe consentire agli utenti di aggiornare l'elenco degli ingredienti disponibili, sottraendo gli ingredienti usati da quelli disponibili.
-
-Sarà  inoltre  possibile  per  i  birrai  vendere  la  birra  prodotta.  L’applicazione  deve  offrire un’interfaccia web per la prenotazione e la vendita. Un cliente registrato può prenotare un lotto di birra in produzione, oppure parte di esso. Quando il lotto è stato prodotto, il birraio può confermare  le  prenotazioni  e  procedere  con  la  vendita  oppure,  se  non  è  soddisfatto  del prodotto, cancellarle, per non danneggiare il proprio buon nome. La birra non prenotata può essere messa in vendita e comprata da utenti registrati.  
-
-**Scopo dell’applicazione**
-
-Il sistema deve implementare le funzionalità sopra descritte, ovvero creazione, modifica e cancellazione di ricette, creazione di istanze di ricette (birre), supporto per le note sulle birre, controllo  degli  ingredienti  disponibili,  supporto  alla  produzione  con  allarmi,  supporto  alla vendita. 
+### Application goal
+The system must implement the functionalities described above, i.e. creation, modification and deletion of recipes, creation of recipe instances (beers), support for beer notes, control of available ingredients, production support with alarms, sales support.
