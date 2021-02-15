@@ -1,7 +1,7 @@
 # LabBD
 "Database Laboratory" Class Team Project - University of Pisa
 
-Click [[here](/ProgettoLBD_IT.pdf)
+Click [here](/ProgettoLBD_IT.pdf)
 
 **Team:** Betola Gianmarco, Catania Saverio, Chen Davide, Li Malio, Pardini Luca, Stasula Ruslan
 
